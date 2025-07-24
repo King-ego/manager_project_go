@@ -1,9 +1,15 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"manager_project/router"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
 	server := gin.Default()
+
+	router.SetupAllRoutes(server)
 
 	server.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
