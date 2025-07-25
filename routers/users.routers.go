@@ -19,9 +19,9 @@ func NewUserRouter(server *gin.Engine) *UserRouter {
 
 func (r *UserRouter) setupUserRoutes() {
 	fmt.Println("Setting up user routes")
-	usersRoutes := controllers.NewUserController()
+	usersController := controllers.NewUserController()
 
-	r.server.GET("/users", usersRoutes.GetUsers)
+	r.server.GET("/users", usersController.GetUsers)
 }
 
 func (r *UserRouter) Routers() {
