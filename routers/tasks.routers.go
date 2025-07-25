@@ -6,21 +6,21 @@ type TasksRouter struct {
 	server *gin.Engine
 }
 
-func NewProjectRouter(server *gin.Engine) *TasksRouter {
+func NewTasksRouter(server *gin.Engine) *TasksRouter {
 	return &TasksRouter{
 		server: server,
 	}
 }
 
-func (r *TasksRouter) setupProjectRoutes() {
+func (r *TasksRouter) setupTaskRoutes() {
 
 }
 
 func (r *TasksRouter) Routers() {
-	r.setupProjectRoutes()
+	r.setupTaskRoutes()
 }
 
-func SetupProjectRoutes(server *gin.Engine) {
-	projectRouter := NewProjectRouter(server)
-	projectRouter.Routers()
+func SetupTasksRoutes(server *gin.Engine) {
+	tasksRouter := NewTasksRouter(server)
+	tasksRouter.Routers()
 }
