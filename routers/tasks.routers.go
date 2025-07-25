@@ -2,21 +2,21 @@ package routers
 
 import "github.com/gin-gonic/gin"
 
-type ProjectRouter struct {
+type TasksRouter struct {
 	server *gin.Engine
 }
 
-func NewProjectRouter(server *gin.Engine) *ProjectRouter {
-	return &ProjectRouter{
+func NewProjectRouter(server *gin.Engine) *TasksRouter {
+	return &TasksRouter{
 		server: server,
 	}
 }
 
-func (r *ProjectRouter) setupProjectRoutes() {
+func (r *TasksRouter) setupProjectRoutes() {
 
 }
 
-func (r *ProjectRouter) Routers() {
+func (r *TasksRouter) Routers() {
 	r.setupProjectRoutes()
 }
 
