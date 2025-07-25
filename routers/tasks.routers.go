@@ -1,6 +1,10 @@
 package routers
 
-import "github.com/gin-gonic/gin"
+import (
+	"manager_project/controllers"
+
+	"github.com/gin-gonic/gin"
+)
 
 type TasksRouter struct {
 	server *gin.Engine
@@ -13,6 +17,8 @@ func NewTasksRouter(server *gin.Engine) *TasksRouter {
 }
 
 func (r *TasksRouter) setupTaskRoutes() {
+	taskController := controllers.NewTaskController()
+	r.server.GET("/tasks", taskController.GetTasks)
 
 }
 
