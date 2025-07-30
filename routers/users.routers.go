@@ -22,6 +22,7 @@ func (r *UserRouter) setupUserRoutes() {
 	usersController := controllers.NewUserController()
 
 	r.server.GET("/users", usersController.GetUsers)
+	r.server.POST("/users", usersController.CreateUser)
 }
 
 func (r *UserRouter) Routers() {
