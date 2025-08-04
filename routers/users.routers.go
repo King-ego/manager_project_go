@@ -23,6 +23,7 @@ func (r *UserRouter) setupUserRoutes() {
 
 	r.server.GET("/users", usersController.GetUsers)
 	r.server.POST("/users", usersController.CreateUser)
+	r.server.DELETE("users/:user_id", usersController.DeleteUser)
 }
 
 func (r *UserRouter) Routers() {
