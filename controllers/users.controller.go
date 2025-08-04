@@ -38,3 +38,10 @@ func (uc *UserController) CreateUser(ctx *gin.Context) {
 		"data":    newUser,
 	})
 }
+
+func (uc *UserController) DeleteUser(ctx *gin.Context) {
+	user_id := ctx.Param("user_id")
+	ctx.JSON(http.StatusAccepted, gin.H{
+		"user_id": user_id,
+	})
+}
