@@ -1,0 +1,7 @@
+services:
+  manager_project:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8989:8989"
