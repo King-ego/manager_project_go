@@ -1,8 +1,6 @@
 package router
 
 import (
-	"manager_project/routers"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,8 +15,6 @@ func NewRouter(server *gin.Engine) *SetupRouter {
 }
 
 func (r *SetupRouter) setupRouters() {
-	routers.SetupUserRoutes(r.server)
-	routers.SetupTasksRoutes(r.server)
 }
 
 func (r *SetupRouter) Routers() {
