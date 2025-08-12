@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"log"
+	"manager_project/config"
+	"manager_project/config/migrations"
 	"manager_project/router"
 	"net/http"
 	"os"
@@ -15,9 +17,17 @@ import (
 )
 
 func main() {
+	db, err := config.ConnectDb()
+	if err != nil {
+		log.Fatalf("Could not connect to the database: %v", err)
+	}
+
+	if err := migrations.RunMigrations(db); err != nil {
+		log.Fatalf("Could not run migrations: %v", err)
+	}
 	server := gin.Default()
 
-	router.SetupAllRoutes(server)
+	router.SetupAllRoutes(server, db)
 
 	server.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
