@@ -5,3 +5,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8989:8989"
+  manager_db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: manager
+      POSTGRES_PASSWORD: manager
+      POSTGRES_DB: manager_db
+    ports:
+      - "15432:5432"
