@@ -1,6 +1,6 @@
 package model
 
-type Student struct {
+type Students struct {
 	id    string
 	name  string
 	email string
