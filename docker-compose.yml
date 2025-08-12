@@ -1,15 +1,23 @@
 services:
-  manager_project:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8989:8989"
   manager_db:
     image: postgres:17
     environment:
       POSTGRES_USER: manager
       POSTGRES_PASSWORD: manager
       POSTGRES_DB: manager_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U manager -d manager_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     ports:
       - "15432:5432"
+  manager_project:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      manager_db:
+        condition: service_healthy
+    ports:
+      - "8989:8989"
