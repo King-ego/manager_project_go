@@ -1,4 +1,4 @@
-package model
+package models
 
 type Classes struct {
 	StudentID string `json:"student_id"`
