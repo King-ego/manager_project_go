@@ -1,4 +1,4 @@
-package model
+package models
 
 type Score struct {
 	StudentID string  `json:"student_id"`
