@@ -13,6 +13,7 @@ type Migration interface {
 
 var allMigrations = []Migration{
 	&CreateTableStudents{},
+	&CreateTableClasses{},
 }
 
 func RunMigrations(db *gorm.DB) error {
