@@ -8,10 +8,12 @@ import (
 
 type Classes struct {
 	gorm.Model
-	ID        string    `gorm:"primaryKey;default:uuid_generate_v4();type:uuid" json:"id"`
-	TeacherID string    `gorm:"type:uuid" json:"teacher_id"`
-	Year      int       `gorm:"type:int" json:"year"`
-	Semester  int       `gorm:"type:int" json:"semester"`
-	CreatedAt time.Time `gorm:"autoCreateTime" json:"created_at"`
-	UpdatedAt time.Time `gorm:"autoUpdateTime" json:"updated_at"`
+	ID           string    `gorm:"primaryKey;unique;default:uuid_generate_v4();type:uuid" json:"id"`
+	ClassName    string    `gorm:"not null" json:"className"`
+	TeacherID    string    `gorm:"type:uuid" json:"teacher_id"`
+	AcademicYear int       `gorm:"type:int" json:"academic_year"`
+	Semester     int       `gorm:"type:int" json:"semester"`
+	RoomNumber   int       `gorm:"type:int" json:"room_number"`
+	CreatedAt    time.Time `gorm:"autoCreateTime" json:"created_at"`
+	UpdatedAt    time.Time `gorm:"autoUpdateTime" json:"updated_at"`
 }
