@@ -4,27 +4,30 @@ import (
 	"manager_project/routers"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type SetupRouter struct {
 	server *gin.Engine
+	db     *gorm.DB
 }
 
-func NewRouter(server *gin.Engine) *SetupRouter {
+func NewRouter(server *gin.Engine, db *gorm.DB) *SetupRouter {
 	return &SetupRouter{
 		server: server,
+		db:     db,
 	}
 }
 
 func (r *SetupRouter) setupRouters() {
-	routers.SetupUsersRoutes(r.server)
+	routers.SetupUsersRoutes(r.server, r.db)
 }
 
 func (r *SetupRouter) Routers() {
 	r.setupRouters()
 }
 
-func SetupAllRoutes(server *gin.Engine) {
-	router := NewRouter(server)
+func SetupAllRoutes(server *gin.Engine, db *gorm.DB) {
+	router := NewRouter(server, db)
 	router.Routers()
 }
