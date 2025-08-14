@@ -1,0 +1,40 @@
+name: CI merge
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Copiar .env.example to .env
+        run: cp .env.example .env
+
+      - name: 🐳 Subir Docker Compose
+        run: docker compose -f docker-compose.yml up -d --build
+
+      - name: 🕒 Aguardar serviços subirem
+        run: |
+            echo "Aguardando Postgres e Redis..."
+            sleep 20
+
+      - name: 📋 Verificar containers ativos
+        run: docker ps
+
+      - name: 🔍 Testar rota /health
+        run: |
+          echo "Testando rota /health..."
+          for i in {1..10}; do
+            if curl -s http://localhost:8989/health | grep -q "healthy"; then
+              echo "✅ Serviço respondeu saudável!"
+              exit 0
+            fi
+            echo "Aguardando serviço iniciar..."
+            sleep 3
+          done
+          echo "❌ Serviço não respondeu a tempo."
+          exit 1
