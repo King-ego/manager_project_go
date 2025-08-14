@@ -29,9 +29,25 @@ func main() {
 
 	router.SetupAllRoutes(server, db)
 
-	server.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"status": "ok",
+	server.GET("/health", func(c *gin.Context) {
+		sqlDB, err := db.DB()
+		if err != nil {
+			c.JSON(http.StatusServiceUnavailable, gin.H{
+				"status": "database connection error",
+			})
+			return
+		}
+
+		if err := sqlDB.Ping(); err != nil {
+			c.JSON(http.StatusServiceUnavailable, gin.H{
+				"status": "database ping failed",
+			})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "healthy",
+			"version": "1.0.0",
 		})
 	})
 
