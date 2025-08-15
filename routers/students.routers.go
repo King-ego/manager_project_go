@@ -9,19 +9,19 @@ import (
 	"gorm.io/gorm"
 )
 
-type UsersRouters struct {
+type StudentsRouters struct {
 	server *gin.Engine
 	db     *gorm.DB
 }
 
-func NewUsersRouters(server *gin.Engine, db *gorm.DB) *UsersRouters {
-	return &UsersRouters{
+func NewStudentsRouters(server *gin.Engine, db *gorm.DB) *StudentsRouters {
+	return &StudentsRouters{
 		server: server,
 		db:     db,
 	}
 }
 
-func (r *UsersRouters) setupUsersRouters() {
+func (r *StudentsRouters) setupStudentsRouters() {
 	studentRepository := repositories.NewUserRepository(r.db)
 	studentsUseCase := usecases.NewStudentsUseCase(studentRepository)
 	usersController := controllers.NewUserController(studentsUseCase)
@@ -33,11 +33,11 @@ func (r *UsersRouters) setupUsersRouters() {
 	}
 }
 
-func (r *UsersRouters) UsersRouters() {
-	r.setupUsersRouters()
+func (r *StudentsRouters) StudentsRouters() {
+	r.setupStudentsRouters()
 }
 
-func SetupUsersRoutes(server *gin.Engine, db *gorm.DB) {
-	router := NewUsersRouters(server, db)
-	router.UsersRouters()
+func SetupStudentsRoutes(server *gin.Engine, db *gorm.DB) {
+	router := NewStudentsRouters(server, db)
+	router.StudentsRouters()
 }
