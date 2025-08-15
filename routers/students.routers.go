@@ -24,12 +24,12 @@ func NewStudentsRouters(server *gin.Engine, db *gorm.DB) *StudentsRouters {
 func (r *StudentsRouters) setupStudentsRouters() {
 	studentRepository := repositories.NewUserRepository(r.db)
 	studentsUseCase := usecases.NewStudentsUseCase(studentRepository)
-	usersController := controllers.NewUserController(studentsUseCase)
+	studentsController := controllers.NewStudentsController(studentsUseCase)
 
-	users := r.server.Group("/students")
+	students := r.server.Group("/students")
 	{
 
-		users.POST("/", usersController.CreateUser)
+		students.POST("/", studentsController.CreateStudents)
 	}
 }
 
