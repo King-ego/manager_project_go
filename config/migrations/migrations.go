@@ -14,6 +14,7 @@ type Migration interface {
 var allMigrations = []Migration{
 	&CreateTableStudents{},
 	&CreateTableClasses{},
+	&CreateTableScores{},
 }
 
 func RunMigrations(db *gorm.DB) error {
