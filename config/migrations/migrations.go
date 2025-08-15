@@ -15,6 +15,7 @@ var allMigrations = []Migration{
 	&CreateTableStudents{},
 	&CreateTableClasses{},
 	&CreateTableScores{},
+	&CreateTableEnrollments{},
 }
 
 func RunMigrations(db *gorm.DB) error {
