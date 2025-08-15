@@ -26,7 +26,7 @@ func (r *UsersRouters) setupUsersRouters() {
 	studentsUseCase := usecases.NewStudentsUseCase(studentRepository)
 	usersController := controllers.NewUserController(studentsUseCase)
 
-	users := r.server.Group("/users")
+	users := r.server.Group("/students")
 	{
 
 		users.POST("/", usersController.CreateUser)
