@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"manager_project/dto"
 	"net/http"
 
 	"manager_project/usecases"
@@ -17,19 +18,14 @@ func NewUserController(uc usecases.StudentsUseCase) *UserController {
 }
 
 func (ctrl *UserController) CreateUser(c *gin.Context) {
-	var request struct {
-		Name      string `json:"name" binding:"required"`
-		Email     string `json:"email" binding:"required,email"`
-		Password  string `json:"password" binding:"required"`
-		BirthDate string `json:"birth_date" binding:"required,date=2006-01-02"`
-	}
+	var createStudentDTO dto.CreateStudentsDTO
 
-	if err := c.ShouldBindJSON(&request); err != nil {
+	if err := c.ShouldBindJSON(&createStudentDTO); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	err, text := ctrl.userUseCase.Create(request.Name, request.Email, request.Password, request.BirthDate)
+	err, text := ctrl.userUseCase.Create(createStudentDTO.Name, createStudentDTO.Email, createStudentDTO.Password, createStudentDTO.BirthDate)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
