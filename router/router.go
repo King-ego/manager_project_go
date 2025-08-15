@@ -20,7 +20,7 @@ func NewRouter(server *gin.Engine, db *gorm.DB) *SetupRouter {
 }
 
 func (r *SetupRouter) setupRouters() {
-	routers.SetupUsersRoutes(r.server, r.db)
+	routers.SetupStudentsRoutes(r.server, r.db)
 }
 
 func (r *SetupRouter) Routers() {
