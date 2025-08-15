@@ -9,15 +9,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UserController struct {
+type StudentsController struct {
 	userUseCase usecases.StudentsUseCase
 }
 
-func NewUserController(uc usecases.StudentsUseCase) *UserController {
-	return &UserController{userUseCase: uc}
+func NewStudentsController(uc usecases.StudentsUseCase) *StudentsController {
+	return &StudentsController{userUseCase: uc}
 }
 
-func (ctrl *UserController) CreateUser(c *gin.Context) {
+func (ctrl *StudentsController) CreateStudents(c *gin.Context) {
 	var createStudentDTO dto.CreateStudentsDTO
 
 	if err := c.ShouldBindJSON(&createStudentDTO); err != nil {
