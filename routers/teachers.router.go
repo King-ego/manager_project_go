@@ -22,6 +22,8 @@ func (r *TeacherRouter) setupTeacherRouters() {
 	teachers := r.server.Group("/teachers")
 	{
 		teachers.POST("/")
+		teachers.GET("/:teacherId")
+		teachers.GET("/")
 	}
 
 }
