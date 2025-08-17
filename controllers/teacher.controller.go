@@ -2,14 +2,19 @@ package controllers
 
 import (
 	"manager_project/dto"
+	"manager_project/usecases"
 
 	"github.com/gin-gonic/gin"
 )
 
-type TeacherController struct{}
+type TeacherController struct {
+	teacherUseCase usecases.TeacherUseCase
+}
 
-func NewTeacherController() *TeacherController {
-	return &TeacherController{}
+func NewTeacherController(uc usecases.TeacherUseCase) *TeacherController {
+	return &TeacherController{
+		teacherUseCase: uc,
+	}
 }
 
 func (t *TeacherController) CreateTeacher(c *gin.Context) {
@@ -17,6 +22,13 @@ func (t *TeacherController) CreateTeacher(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&createTeacherDTO); err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	err := t.teacherUseCase.Save(createTeacherDTO.Name, createTeacherDTO.Email, createTeacherDTO.HireDate, createTeacherDTO.Specialization)
+
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
