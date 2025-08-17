@@ -7,7 +7,7 @@ import (
 )
 
 type TeacherRepository interface {
-	Save() error
+	Save(teacher *models.Teacher) error
 	GetByID(teacherId string) (models.Teacher, error)
 }
 
@@ -19,8 +19,8 @@ func NewStudentRepository(db *gorm.DB) TeacherRepository {
 	return &teacherRepository{db: db}
 }
 
-func (r *teacherRepository) Save() error {
-	return r.db.Create(&struct{}{}).Error
+func (r *teacherRepository) Save(teacher *models.Teacher) error {
+	return r.db.Create(teacher).Error
 }
 
 func (r *teacherRepository) GetByID(teacherId string) (models.Teacher, error) {
