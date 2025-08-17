@@ -12,10 +12,10 @@ type StudentsUseCase interface {
 }
 
 type studentsUseCase struct {
-	repository repositories.UserRepository
+	repository repositories.StudentsRepository
 }
 
-func NewStudentsUseCase(repository repositories.UserRepository) StudentsUseCase {
+func NewStudentsUseCase(repository repositories.StudentsRepository) StudentsUseCase {
 	return &studentsUseCase{
 		repository: repository,
 	}
