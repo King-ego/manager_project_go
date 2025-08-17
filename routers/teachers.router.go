@@ -23,12 +23,12 @@ func NewTeacherRouter(server *gin.Engine, db *gorm.DB) *TeacherRouter {
 }
 
 func (r *TeacherRouter) setupTeacherRouters() {
-	studentRepository := repositories.NewTeacherRepository(r.db)
-	studentUseCase := usecases.NewTeacherUseCase(studentRepository)
-	studentsController := controllers.NewTeacherController(studentUseCase)
+	teacherRepository := repositories.NewTeacherRepository(r.db)
+	teacherUseCase := usecases.NewTeacherUseCase(teacherRepository)
+	teachersController := controllers.NewTeacherController(teacherUseCase)
 	teachers := r.server.Group("/teachers")
 	{
-		teachers.POST("/", studentsController.CreateTeacher)
+		teachers.POST("/", teachersController.CreateTeacher)
 		teachers.GET("/:teacherId")
 		teachers.GET("/")
 	}
