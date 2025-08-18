@@ -36,3 +36,20 @@ func (t *TeacherController) CreateTeacher(c *gin.Context) {
 
 	c.JSON(201, gin.H{"data": text})
 }
+
+func (t *TeacherController) GetTeacherByID(c *gin.Context) {
+	teacherId := c.Param("teacherId")
+
+	if teacherId == "" {
+		c.JSON(400, gin.H{"error": "Teacher ID is required"})
+		return
+	}
+
+	teacher, err := t.teacherUseCase.GetByID(teacherId)
+	if err != nil {
+		c.JSON(404, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"data": teacher})
+}
