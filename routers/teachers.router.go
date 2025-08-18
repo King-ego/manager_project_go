@@ -29,7 +29,7 @@ func (r *TeacherRouter) setupTeacherRouters() {
 	teachers := r.server.Group("/teachers")
 	{
 		teachers.POST("/", teachersController.CreateTeacher)
-		teachers.GET("/:teacherId")
+		teachers.GET("/:teacherId", teachersController.GetTeacherByID)
 		teachers.GET("/")
 	}
 
