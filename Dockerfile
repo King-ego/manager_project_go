@@ -18,5 +18,8 @@ EXPOSE 8989
 # Build the Go app
 RUN go build -o main cmd/main.go
 
+RUN go build -o migrate cmd/migrate/main.go
+RUN go build -o rollback cmd/rollback/main.go
+
 # Command to run the executable
 CMD ["./main"]
