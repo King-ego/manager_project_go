@@ -9,6 +9,7 @@ import (
 
 type TeacherUseCase interface {
 	Save(name string, email string, specialization string, hireDate string) error
+	GetByID(teacherId string) (models.Teacher, error)
 }
 
 type teacherUseCase struct {
@@ -32,4 +33,13 @@ func (u *teacherUseCase) Save(name string, email string, specialization string, 
 		HireDate:       parsedDate,
 	}
 	return u.teacherRepository.Save(teacher)
+}
+
+func (u *teacherUseCase) GetByID(teacherId string) (models.Teacher, error) {
+	teacher, err := u.teacherRepository.GetByID(teacherId)
+	if err != nil {
+		return models.Teacher{}, errors.New("teacher not found")
+	}
+
+	return teacher, nil
 }
