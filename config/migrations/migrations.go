@@ -28,7 +28,6 @@ var allMigrations = []Migration{
 }
 
 func RunMigrations(db *gorm.DB) error {
-	// Criar tabela de controle de migrações PRIMEIRO
 	if err := db.AutoMigrate(&MigrationRecord{}); err != nil {
 		log.Printf("Failed to create migration_records table: %v", err)
 		return err
@@ -67,14 +66,12 @@ func RollBackMigrations(db *gorm.DB) error {
 		return nil
 	}
 
-	// Buscar a última migração executada
 	var lastRecord MigrationRecord
 	if err := db.Order("executed_at DESC").First(&lastRecord).Error; err != nil {
 		log.Println("No migrations found to rollback")
 		return nil
 	}
 
-	// Encontrar a migração correspondente
 	var targetMigration Migration
 	for _, migration := range allMigrations {
 		migrationName := reflect.TypeOf(migration).Elem().Name()
