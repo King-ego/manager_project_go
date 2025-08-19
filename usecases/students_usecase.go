@@ -46,3 +46,11 @@ func (uc *studentsUseCase) Create(name string, email string, password string, bi
 	return nil, "student created successfully"
 
 }
+
+func (uc *studentsUseCase) GetByID(studentId string) (models.Students, error) {
+	student, err := uc.repository.GetByID(studentId)
+	if err != nil {
+		return models.Students{}, err
+	}
+	return student, nil
+}
