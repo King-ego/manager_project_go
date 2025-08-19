@@ -8,6 +8,7 @@ import (
 
 type StudentsRepository interface {
 	Save(student *models.Students) error
+	GetByID(studentId string) (models.Students, error)
 }
 type studentsRepository struct {
 	db *gorm.DB
