@@ -30,7 +30,6 @@ func (r *TeacherRouter) setupTeacherRouters() {
 	{
 		teachers.POST("/", teachersController.CreateTeacher)
 		teachers.GET("/:teacherId", teachersController.GetTeacherByID)
-		teachers.GET("/")
 	}
 
 }
