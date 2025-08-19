@@ -33,3 +33,20 @@ func (ctrl *StudentsController) CreateStudents(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, text)
 }
+
+func (ctrl *StudentsController) GetStudentByID(c *gin.Context) {
+	studentId := c.Param("studentId")
+
+	if studentId == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Student ID is required"})
+		return
+	}
+
+	student, err := ctrl.userUseCase.GetByID(studentId)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": student})
+}
