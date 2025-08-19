@@ -9,6 +9,7 @@ import (
 
 type StudentsUseCase interface {
 	Create(name string, email string, password string, birthDate string) (error, string)
+	GetByID(studentId string) (models.Students, error)
 }
 
 type studentsUseCase struct {
