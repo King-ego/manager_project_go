@@ -5,6 +5,7 @@ on:
   pull_request:
 jobs:
   docker:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
 
     steps:
