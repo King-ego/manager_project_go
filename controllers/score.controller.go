@@ -1,21 +1,29 @@
 package controllers
 
-import "manager_project/usecases"
+import (
+	"manager_project/usecases"
+
+	"github.com/gin-gonic/gin"
+)
 
 type ScoreController struct {
-	scoreUseCase usecases.ScoreUseCase
+	scoreUseCase *usecases.ScoreUseCase
 }
 
-func NewScoreController(useCase usecases.ScoreUseCase) *ScoreController {
+func NewScoreController(useCase *usecases.ScoreUseCase) *ScoreController {
 	return &ScoreController{
 		scoreUseCase: useCase,
 	}
 }
 
-func (c *ScoreController) CreateScore() (string, error) {
-	text, err := c.scoreUseCase.CreateScore()
+func (sc *ScoreController) CreateScore(c *gin.Context) {
+	text, err := sc.scoreUseCase.CreateScore()
 	if err != nil {
-		return "", err
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
 	}
-	return text, nil
+	c.JSON(201, gin.H{
+		"data": text,
+	})
 }
