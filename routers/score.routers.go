@@ -1,6 +1,10 @@
 package routers
 
 import (
+	"manager_project/controllers"
+	"manager_project/repositories"
+	"manager_project/usecases"
+
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -18,8 +22,11 @@ func NewScoreRouters(server *gin.Engine, db *gorm.DB) *ScoreRouters {
 }
 
 func (r *ScoreRouters) setupScoreRouters() {
+	scoreRepository := repositories.NewScoreRepository(r.db)
+	scoreUseCase := usecases.NewScoreUseCase(scoreRepository)
+	scoreController := controllers.NewScoreController(scoreUseCase)
 
-	scores := r.server.Group("/scores")
+	scores := r.server.Group("/scores", scoreController.CreateScore)
 	{
 		scores.GET("/:scoreId")
 	}
