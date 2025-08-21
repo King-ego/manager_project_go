@@ -26,9 +26,9 @@ func (r *ScoreRouters) setupScoreRouters() {
 	scoreUseCase := usecases.NewScoreUseCase(scoreRepository)
 	scoreController := controllers.NewScoreController(scoreUseCase)
 
-	scores := r.server.Group("/scores", scoreController.CreateScore)
+	scores := r.server.Group("/scores")
 	{
-		scores.GET("/:scoreId")
+		scores.POST("/", scoreController.CreateScore)
 	}
 }
 
