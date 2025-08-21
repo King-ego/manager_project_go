@@ -18,9 +18,6 @@ func NewScoreRouters(server *gin.Engine, db *gorm.DB) *ScoreRouters {
 }
 
 func (r *ScoreRouters) setupScoreRouters() {
-	// scoreRepository := repositories.NewScoreRepository(r.db)
-	// scoreUseCase := usecases.NewScoreUseCase(scoreRepository)
-	// scoreController := controllers.NewScoreController(scoreUseCase)
 
 	scores := r.server.Group("/scores")
 	{
