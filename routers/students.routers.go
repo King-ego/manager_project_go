@@ -31,6 +31,7 @@ func (r *StudentsRouters) setupStudentsRouters() {
 
 		students.POST("/", studentsController.CreateStudents)
 		students.GET("/:studentId", studentsController.GetStudentByID)
+		students.PUT("/:studentId", studentsController.UpdateStudent)
 	}
 }
 
