@@ -7,22 +7,17 @@ import (
 	"time"
 )
 
-type StudentsUseCase interface {
-	Create(name string, email string, password string, birthDate string) (error, string)
-	GetByID(studentId string) (models.Students, error)
-}
-
-type studentsUseCase struct {
+type StudentsUseCase struct {
 	repository repositories.StudentsRepository
 }
 
-func NewStudentsUseCase(repository repositories.StudentsRepository) StudentsUseCase {
-	return &studentsUseCase{
+func NewStudentsUseCase(repository repositories.StudentsRepository) *StudentsUseCase {
+	return &StudentsUseCase{
 		repository: repository,
 	}
 }
 
-func (uc *studentsUseCase) Create(name string, email string, password string, birthDate string) (error, string) {
+func (uc *StudentsUseCase) Create(name string, email string, password string, birthDate string) (error, string) {
 	if len(name) < 3 {
 		return errors.New("name must be at least 3 characters"), ""
 	}
@@ -48,7 +43,7 @@ func (uc *studentsUseCase) Create(name string, email string, password string, bi
 
 }
 
-func (uc *studentsUseCase) GetByID(studentId string) (models.Students, error) {
+func (uc *StudentsUseCase) GetByID(studentId string) (models.Students, error) {
 	student, err := uc.repository.GetByID(studentId)
 	if err != nil {
 		return models.Students{}, err
