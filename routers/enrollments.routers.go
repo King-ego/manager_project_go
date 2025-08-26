@@ -17,8 +17,12 @@ func NewEnrollmentsRoutes(server *gin.Engine, db *gorm.DB) *EnrollmentsRouters {
 	}
 }
 
-func (er *EnrollmentsRouters) setupEnrollmentsRoutes() string {
-	return "Enrollments routes set up"
+func (er *EnrollmentsRouters) setupEnrollmentsRoutes() {
+	enrollments := er.server.Group("/enrollments")
+	{
+		enrollments.GET("/")
+	}
+
 }
 
 func (er *EnrollmentsRouters) EnrollmentsRoutes() {
