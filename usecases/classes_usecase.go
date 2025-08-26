@@ -1,6 +1,9 @@
 package usecases
 
-import "manager_project/repositories"
+import (
+	"manager_project/models"
+	"manager_project/repositories"
+)
 
 type ClassesUseCase struct {
 	repository repositories.ClassesRepository
@@ -12,8 +15,8 @@ func NewClassesUseCase(repository repositories.ClassesRepository) *ClassesUseCas
 	}
 }
 
-func (c *ClassesUseCase) CreateClasses() error {
-	err := c.repository.CreateCl(nil)
+func (c *ClassesUseCase) CreateClasses(createClasses *models.Classes) error {
+	err := c.repository.CreateClasses(createClasses)
 	if err != nil {
 		return err
 	}
