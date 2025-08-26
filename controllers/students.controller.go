@@ -10,11 +10,11 @@ import (
 )
 
 type StudentsController struct {
-	userUseCase usecases.StudentsUseCase
+	studentsUseCase *usecases.StudentsUseCase
 }
 
-func NewStudentsController(uc usecases.StudentsUseCase) *StudentsController {
-	return &StudentsController{userUseCase: uc}
+func NewStudentsController(uc *usecases.StudentsUseCase) *StudentsController {
+	return &StudentsController{studentsUseCase: uc}
 }
 
 func (ctrl *StudentsController) CreateStudents(c *gin.Context) {
@@ -25,7 +25,7 @@ func (ctrl *StudentsController) CreateStudents(c *gin.Context) {
 		return
 	}
 
-	err, text := ctrl.userUseCase.Create(createStudentDTO.Name, createStudentDTO.Email, createStudentDTO.Password, createStudentDTO.BirthDate)
+	err, text := ctrl.studentsUseCase.Create(createStudentDTO.Name, createStudentDTO.Email, createStudentDTO.Password, createStudentDTO.BirthDate)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -42,7 +42,7 @@ func (ctrl *StudentsController) GetStudentByID(c *gin.Context) {
 		return
 	}
 
-	student, err := ctrl.userUseCase.GetByID(studentId)
+	student, err := ctrl.studentsUseCase.GetByID(studentId)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
