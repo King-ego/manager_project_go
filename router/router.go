@@ -23,7 +23,7 @@ func (r *SetupRouter) setupRouters() {
 	routers.SetupStudentsRoutes(r.server, r.db)
 	routers.SetupTeacherRoutes(r.server, r.db)
 	routers.SetupScoreRoutes(r.server, r.db)
-	routers.SetupEnrollmentsRoutes()
+	routers.SetupEnrollmentsRoutes(r.server, r.db)
 }
 
 func (r *SetupRouter) Routers() {
