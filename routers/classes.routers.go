@@ -1,6 +1,10 @@
 package routers
 
 import (
+	"manager_project/controllers"
+	"manager_project/repositories"
+	"manager_project/usecases"
+
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -18,9 +22,13 @@ func NewClassesRouter(server *gin.Engine, db *gorm.DB) *ClassesRouter {
 }
 
 func (pr *ClassesRouter) setupClassesRouter() {
+	classesRepository := repositories.NewClassesRepository(pr.db)
+	classesUseCase := usecases.NewClassesUseCase(classesRepository)
+	classesController := controllers.NewClassesController(classesUseCase)
+
 	classes := pr.server.Group("/classes")
 	{
-		classes.GET("/")
+		classes.GET("/", classesController.CreateClasses)
 	}
 }
 
