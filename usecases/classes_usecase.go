@@ -13,7 +13,7 @@ func NewClassesUseCase(repository repositories.ClassesRepository) *ClassesUseCas
 }
 
 func (c *ClassesUseCase) CreateClasses() error {
-	err := c.repository.CreateEnrollment(nil)
+	err := c.repository.CreateCl(nil)
 	if err != nil {
 		return err
 	}
