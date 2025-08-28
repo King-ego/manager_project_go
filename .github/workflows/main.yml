@@ -35,7 +35,7 @@ jobs:
           sleep 30  # Aguarde um tempo adicional antes de começar os testes
 
           echo "Testando rota /health..."
-          for i in {1..15}; do  
+          for i in {1..10}; do  
             if curl -s http://localhost:8989/health | grep -q "healthy"; then
               echo "✅ Serviço respondeu saudável!"
               exit 0
@@ -48,5 +48,5 @@ jobs:
           echo "=== LOGS DO BANCO ==="
           docker-compose logs manager_db
           echo "=== LOGS DA APLICAÇÃO ==="
-          docker-compose logs manager_project
+          docker compose logs manager_project
           exit 1
