@@ -46,7 +46,7 @@ jobs:
           echo "❌ Serviço não respondeu a tempo."
 
           echo "=== LOGS DO BANCO ==="
-          docker-compose logs manager_db
+          docker compose logs manager_db
           echo "=== LOGS DA APLICAÇÃO ==="
           docker compose logs manager_project
           exit 1
