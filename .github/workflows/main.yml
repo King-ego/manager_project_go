@@ -31,14 +31,22 @@ jobs:
 
       - name: 🔍 Testar rota /health
         run: |
+          echo "Aguardando inicialização dos serviços..."
+          sleep 30  # Aguarde um tempo adicional antes de começar os testes
+
           echo "Testando rota /health..."
-          for i in {1..10}; do
+          for i in {1..15}; do  
             if curl -s http://localhost:8989/health | grep -q "healthy"; then
               echo "✅ Serviço respondeu saudável!"
               exit 0
             fi
-            echo "Aguardando serviço iniciar..."
-            sleep 30
+            echo "Tentativa $i/15 - Aguardando serviço iniciar..."
+            sleep 10  
           done
           echo "❌ Serviço não respondeu a tempo."
+
+          echo "=== LOGS DO BANCO ==="
+          docker-compose logs manager_db
+          echo "=== LOGS DA APLICAÇÃO ==="
+          docker-compose logs manager_project
           exit 1
