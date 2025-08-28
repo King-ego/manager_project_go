@@ -26,6 +26,9 @@ jobs:
       - name: 📋 Verificar containers ativos
         run: docker ps
 
+      - name: Install PostgreSQL client
+        run: sudo apt-get install -y postgresql-client
+
       - name: 🔍 Testar rota /health
         run: |
           echo "Testando rota /health..."
