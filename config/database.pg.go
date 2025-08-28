@@ -23,9 +23,9 @@ func LoadDbConfig() DbConfig {
 	return DbConfig{
 		Host:     getEnv("DB_HOST", "manager_db"),
 		Port:     getEnvAsInt("DB_PORT", 5432),
-		User:     getEnv("DB_USER", "test"),
-		Password: getEnv("DB_PASSWORD", "test"),
-		Dbname:   getEnv("DB_NAME", "test_db"),
+		User:     getEnv("POSTGRES_USER", "test"),
+		Password: getEnv("POSTGRES_PASSWORD", "test"),
+		Dbname:   getEnv("POSTGRES_DB", "test_db"),
 	}
 }
 
