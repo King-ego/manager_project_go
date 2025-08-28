@@ -23,9 +23,9 @@ func LoadDbConfig() DbConfig {
 	return DbConfig{
 		Host:     getEnv("DB_HOST", "manager_db"),
 		Port:     getEnvAsInt("DB_PORT", 5432),
-		User:     getEnv("DB_USER", "manager"),
-		Password: getEnv("DB_PASSWORD", "manager"),
-		Dbname:   getEnv("DB_NAME", "manager_db"),
+		User:     getEnv("DB_USER", "test"),
+		Password: getEnv("DB_PASSWORD", "test"),
+		Dbname:   getEnv("DB_NAME", "test_db"),
 	}
 }
 
