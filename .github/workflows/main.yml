@@ -26,9 +26,6 @@ jobs:
       - name: 📋 Verificar containers ativos
         run: docker ps
 
-      - name: 🔍 Exibir resposta da rota /health
-        run: curl -s http://localhost:8989/health
-
       - name: 🔍 Testar rota /health
         run: |
           echo "Testando rota /health..."
