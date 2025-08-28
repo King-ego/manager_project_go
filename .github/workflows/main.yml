@@ -38,7 +38,7 @@ jobs:
               exit 0
             fi
             echo "Aguardando serviço iniciar..."
-            sleep 3
+            sleep 10
           done
           echo "❌ Serviço não respondeu a tempo."
           exit 1
