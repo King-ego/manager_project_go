@@ -6,10 +6,11 @@ services:
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} || exit 1'" ]
       interval: 5s
       timeout: 5s
       retries: 5
+      start_period: 10s
     ports:
       - "15432:5432"
   manager_project:
