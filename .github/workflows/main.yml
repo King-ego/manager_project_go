@@ -1,7 +1,7 @@
-name: CI merge
+name: CI / Build and Test
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
 jobs:
   docker:
@@ -40,7 +40,7 @@ jobs:
               echo "✅ Serviço respondeu saudável!"
               exit 0
             fi
-            echo "Tentativa $i/15 - Aguardando serviço iniciar..."
+            echo "Tentativa $i/10 - Aguardando serviço iniciar..."
             sleep 10  
           done
           echo "❌ Serviço não respondeu a tempo."
