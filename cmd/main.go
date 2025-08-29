@@ -40,7 +40,7 @@ func main() {
 
 		if err := sqlDB.Ping(); err != nil {
 			c.JSON(http.StatusServiceUnavailable, gin.H{
-				"status": "database ping failed",
+				"status": "test database ping failed",
 			})
 			return
 		}
