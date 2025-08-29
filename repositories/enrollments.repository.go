@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"fmt"
 	"manager_project/models"
 
 	"gorm.io/gorm"
@@ -19,6 +20,7 @@ func NewEnrollmentsRepository(db *gorm.DB) EnrollmentsRepository {
 }
 
 func (r *enrollmentsRepository) CreateEnrollment(enrollment models.Enrollment) error {
+	fmt.Println("enrollment in repo:", enrollment)
 	if err := r.db.Create(&enrollment).Error; err != nil {
 		return err
 	}
