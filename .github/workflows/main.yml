@@ -5,7 +5,9 @@ on:
   pull_request:
 jobs:
   docker:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: |
+      github.ref == 'refs/heads/main' ||
+      github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +38,7 @@ jobs:
 
           echo "Testando rota /health..."
           for i in {1..10}; do  
-            if curl -s http://localhost:8989/health | grep -q "healthy"; then
+            if curl -s http://localhost:8989/health1 | grep -q "healthy"; then
               echo "✅ Serviço respondeu saudável!"
               exit 0
             fi
