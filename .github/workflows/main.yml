@@ -1,11 +1,15 @@
-name: CI / Build and Test
+name: CI Docker Build
 on:
   push:
-    branches: [main, develop]
+    branches: [ main, develop ]
   pull_request:
+    branches: [ main ]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   docker:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    name: CI Docker Build
     runs-on: ubuntu-latest
 
     steps:
@@ -20,8 +24,8 @@ jobs:
 
       - name: 🕒 Aguardar serviços subirem
         run: |
-            echo "Aguardando Postgres e Redis..."
-            sleep 20
+          echo "Aguardando Postgres e Redis..."
+          sleep 20
 
       - name: 📋 Verificar containers ativos
         run: docker ps
@@ -32,16 +36,16 @@ jobs:
       - name: 🔍 Testar rota /health
         run: |
           echo "Aguardando inicialização dos serviços..."
-          sleep 30  # Aguarde um tempo adicional antes de começar os testes
+          sleep 30
 
           echo "Testando rota /health..."
-          for i in {1..10}; do  
+          for i in {1..10}; do
             if curl -s http://localhost:8989/health | grep -q "healthy"; then
               echo "✅ Serviço respondeu saudável!"
               exit 0
             fi
             echo "Tentativa $i/10 - Aguardando serviço iniciar..."
-            sleep 10  
+            sleep 10
           done
           echo "❌ Serviço não respondeu a tempo."
 
