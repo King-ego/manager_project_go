@@ -24,7 +24,7 @@ jobs:
             sleep 20
 
       - name: 📋 Verificar containers ativos
-        run: docker ps
+        run: docker-compose ps
 
       - name: Install PostgreSQL client
         run: sudo apt-get install -y postgresql-client
