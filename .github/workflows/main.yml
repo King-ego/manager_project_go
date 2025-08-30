@@ -28,10 +28,15 @@ jobs:
           sleep 20
 
       - name: 📋 Verificar containers ativos
-        run: docker ps
-
-      - name: Install PostgreSQL client
-        run: sudo apt-get install -y postgresql-client
+        run: |
+          CONTAINER_COUNT=$(docker ps -q | wc -l)
+          echo "Containers ativos: $CONTAINER_COUNT"
+          docker ps
+          if [ "$CONTAINER_COUNT" -ne 3 ]; then
+            echo "❌ Esperado 3 containers, encontrados $CONTAINER_COUNT"
+            exit 1
+          fi
+          echo "✅ 3 containers ativos confirmados"
 
       - name: 🔍 Testar rota /health
         run: |
