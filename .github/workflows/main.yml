@@ -36,7 +36,7 @@ jobs:
             echo "❌ Esperado 2 containers, encontrados $CONTAINER_COUNT"
             exit 1
           fi
-          echo "✅ 3 containers ativos confirmados"
+          echo "✅ 2 containers ativos confirmados"
 
       - name: 🔍 Testar rota /health
         run: |
