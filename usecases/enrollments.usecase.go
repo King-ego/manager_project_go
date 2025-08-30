@@ -3,6 +3,8 @@ package usecases
 import (
 	"manager_project/dto"
 	"manager_project/repositories"
+
+	"golang.org/x/crypto/openpgp/errors"
 )
 
 type EnrollmentsUseCase struct {
@@ -16,9 +18,14 @@ func NewEnrollmentsUseCase(repository repositories.EnrollmentsRepository) *Enrol
 }
 
 func (e *EnrollmentsUseCase) CreateEnrollment(enrollment dto.CreateEnrollmentsDTO) error {
-	err := e.repository.CreateEnrollment(enrollment)
+	enrollmentModel := enrollment.ToEnrollmentModel()
+	if enrollmentModel == nil {
+		return errors.InvalidArgumentError("Invalid enrollment data")
+	}
+
+	err := e.repository.CreateEnrollment(enrollmentModel)
 	if err != nil {
-		return nil
+		return err
 	}
 	return err
 }
