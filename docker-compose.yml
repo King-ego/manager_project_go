@@ -5,6 +5,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      TZ: ${TZ}
+      PUTZ: ${TZ}
     healthcheck:
       test: [ "CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} || exit 1'" ]
       interval: 5s
@@ -18,7 +20,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - TZ=America/Sao_Paulo
+      - TZ=${TZ}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
