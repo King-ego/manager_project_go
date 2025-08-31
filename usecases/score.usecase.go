@@ -22,3 +22,11 @@ func (s *ScoreUseCase) CreateScore() (string, error) {
 	}
 	return "", nil
 }
+
+func (s *ScoreUseCase) GetByStudentID(studentId string) ([]models.Score, error) {
+	scores, err := s.repository.GetByStudentID(studentId)
+	if err != nil {
+		return nil, err
+	}
+	return scores, nil
+}
