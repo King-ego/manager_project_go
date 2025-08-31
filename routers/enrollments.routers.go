@@ -23,9 +23,13 @@ func NewEnrollmentsRoutes(server *gin.Engine, db *gorm.DB) *EnrollmentsRouters {
 
 func (er *EnrollmentsRouters) setupEnrollmentsRoutes() {
 	repository := repositories.NewEnrollmentsRepository(er.db)
+
 	useCase := usecases.NewEnrollmentsUseCase(repository)
+
 	controller := controllers.NewEnrollmentsController(useCase)
+
 	enrollments := er.server.Group("/enrollments")
+
 	{
 		enrollments.GET("/", controller.CreateEnrollment)
 	}
