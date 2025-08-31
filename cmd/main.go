@@ -29,6 +29,7 @@ func main() {
 	server := gin.Default()
 
 	server.Use(middleware.RateLimitMiddleware())
+	server.Use(middleware.TimeoutMiddleware(30 * time.Second))
 
 	router.SetupAllRoutes(server, db)
 
