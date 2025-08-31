@@ -31,8 +31,8 @@ func RateLimitMiddleware() gin.HandlerFunc {
 }
 
 func getRateLimiter(ip string) *rate.Limiter {
-	mu.RWMutex.Lock()
-	defer mu.RWMutex.Unlock()
+	mu.Lock()
+	defer mu.Unlock()
 
 	limiter, exists := visitors[ip]
 	if !exists {
