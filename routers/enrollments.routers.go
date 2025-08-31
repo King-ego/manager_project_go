@@ -31,7 +31,7 @@ func (er *EnrollmentsRouters) setupEnrollmentsRoutes() {
 	enrollments := er.server.Group("/enrollments")
 
 	{
-		enrollments.GET("/", controller.CreateEnrollment)
+		enrollments.POST("/", controller.CreateEnrollment)
 	}
 
 }
