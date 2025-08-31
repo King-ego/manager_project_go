@@ -31,7 +31,6 @@ jobs:
         run: |
           CONTAINER_COUNT=$(docker ps -q | wc -l)
           echo "Containers ativos: $CONTAINER_COUNT"
-          docker ps
           if [ "$CONTAINER_COUNT" -ne 2 ]; then
             echo "❌ Esperado 2 containers, encontrados $CONTAINER_COUNT"
             exit 1
