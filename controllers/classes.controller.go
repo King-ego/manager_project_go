@@ -25,7 +25,9 @@ func (cc *ClassesController) CreateClasses(c *gin.Context) {
 		})
 		return
 	}
+
 	classesModel := createClassesDTO.ToModel()
+
 	if err := cc.useCase.CreateClasses(classesModel); err != nil {
 		c.JSON(400, gin.H{
 			"error": err.Error(),
