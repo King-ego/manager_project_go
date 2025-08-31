@@ -8,6 +8,7 @@ import (
 
 type ScoreRepository interface {
 	CreateScore(score *models.Score) error
+	GetByStudentID(studentId string) ([]models.Score, error)
 }
 
 type scoreRepository struct {
@@ -23,4 +24,13 @@ func (r *scoreRepository) CreateScore(score *models.Score) error {
 		return err
 	}
 	return nil
+}
+
+func (r *scoreRepository) GetByStudentID(studentId string) ([]models.Score, error) {
+	var scores []models.Score
+	err := r.db.Where("student_id = ?", studentId).Find(&scores).Error
+	if err != nil {
+		return nil, err
+	}
+	return scores, nil
 }
