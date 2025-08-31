@@ -27,3 +27,9 @@ func (sc *ScoreController) CreateScore(c *gin.Context) {
 		"data": text,
 	})
 }
+
+func (sc *ScoreController) GetScoreByStudentId(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"data": "GetScoreByStudentId",
+	})
+}
