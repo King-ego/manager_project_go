@@ -29,7 +29,7 @@ func (r *ScoreRouters) setupScoreRouters() {
 	scores := r.server.Group("/scores")
 	{
 		scores.POST("/", scoreController.CreateScore)
-		scores.GET("/:studentId")
+		scores.GET("/:studentId", scoreController.GetScoreByStudentId)
 	}
 }
 
