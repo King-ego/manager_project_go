@@ -6,6 +6,7 @@ import (
 	"log"
 	"manager_project/config"
 	"manager_project/config/migrations"
+	"manager_project/middleware"
 	"manager_project/router"
 	"net/http"
 	"os"
@@ -26,6 +27,9 @@ func main() {
 		log.Fatalf("Could not run migrations: %v", err)
 	}
 	server := gin.Default()
+
+	server.Use(middleware.RateLimitMiddleware())
+	server.Use(middleware.TimeoutMiddleware(30 * time.Second))
 
 	router.SetupAllRoutes(server, db)
 

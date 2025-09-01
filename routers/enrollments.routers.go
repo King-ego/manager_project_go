@@ -1,6 +1,10 @@
 package routers
 
 import (
+	"manager_project/controllers"
+	"manager_project/repositories"
+	"manager_project/usecases"
+
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -18,9 +22,12 @@ func NewEnrollmentsRoutes(server *gin.Engine, db *gorm.DB) *EnrollmentsRouters {
 }
 
 func (er *EnrollmentsRouters) setupEnrollmentsRoutes() {
+	repository := repositories.NewEnrollmentsRepository(er.db)
+	useCase := usecases.NewEnrollmentsUseCase(repository)
+	controller := controllers.NewEnrollmentsController(useCase)
 	enrollments := er.server.Group("/enrollments")
 	{
-		enrollments.GET("/")
+		enrollments.GET("/", controller.CreateEnrollment)
 	}
 
 }
