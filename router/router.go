@@ -21,9 +21,13 @@ func NewRouter(server *gin.Engine, db *gorm.DB) *SetupRouter {
 
 func (r *SetupRouter) setupRouters() {
 	routers.SetupStudentsRoutes(r.server, r.db)
+
 	routers.SetupTeacherRoutes(r.server, r.db)
+
 	routers.SetupScoreRoutes(r.server, r.db)
+
 	routers.SetupEnrollmentsRoutes(r.server, r.db)
+
 	routers.SetupClassesRoutes(r.server, r.db)
 }
 

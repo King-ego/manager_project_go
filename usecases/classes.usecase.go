@@ -22,3 +22,11 @@ func (c *ClassesUseCase) CreateClasses(createClasses *models.Classes) error {
 	}
 	return nil
 }
+
+func (c *ClassesUseCase) GetClassesByStudentId(classesId string) (*models.Classes, error) {
+	classes, err := c.repository.GetClassesByStudentId(classesId)
+	if err != nil {
+		return nil, err
+	}
+	return classes, nil
+}
