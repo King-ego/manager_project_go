@@ -29,6 +29,7 @@ func (pr *ClassesRouter) setupClassesRouter() {
 	classes := pr.server.Group("/classes")
 	{
 		classes.POST("/", classesController.CreateClasses)
+		classes.GET("/:studentId")
 	}
 }
 
