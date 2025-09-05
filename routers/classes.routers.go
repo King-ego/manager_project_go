@@ -23,7 +23,9 @@ func NewClassesRouter(server *gin.Engine, db *gorm.DB) *ClassesRouter {
 
 func (pr *ClassesRouter) setupClassesRouter() {
 	classesRepository := repositories.NewClassesRepository(pr.db)
+
 	classesUseCase := usecases.NewClassesUseCase(classesRepository)
+
 	classesController := controllers.NewClassesController(classesUseCase)
 
 	classes := pr.server.Group("/classes")
