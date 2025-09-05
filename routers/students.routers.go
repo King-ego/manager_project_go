@@ -23,7 +23,9 @@ func NewStudentsRouters(server *gin.Engine, db *gorm.DB) *StudentsRouters {
 
 func (r *StudentsRouters) setupStudentsRouters() {
 	studentRepository := repositories.NewStudentsRepository(r.db)
+
 	studentsUseCase := usecases.NewStudentsUseCase(studentRepository)
+
 	studentsController := controllers.NewStudentsController(studentsUseCase)
 
 	students := r.server.Group("/students")
