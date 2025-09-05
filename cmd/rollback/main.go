@@ -7,13 +7,13 @@ import (
 )
 
 func main() {
-	db, err := db.ConnectDb()
+	database, err := db.ConnectDb()
 	if err != nil {
 		log.Fatalf("Could not connect to the database: %v", err)
 	}
 
 	log.Println("Starting rollback...")
-	if err := migrations.RollBackMigrations(db); err != nil {
+	if err := migrations.RollBackMigrations(database); err != nil {
 		log.Fatalf("Could not rollback migrations: %v", err)
 	}
 	log.Println("Rollback completed successfully")
