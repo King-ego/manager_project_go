@@ -2,12 +2,12 @@ package main
 
 import (
 	"log"
-	"manager_project/config"
-	"manager_project/config/migrations"
+	"manager_project/db"
+	"manager_project/db/migrations"
 )
 
 func main() {
-	db, err := config.ConnectDb()
+	db, err := db.ConnectDb()
 	if err != nil {
 		log.Fatalf("Could not connect to the database: %v", err)
 	}
