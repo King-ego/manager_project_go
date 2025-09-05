@@ -18,12 +18,12 @@ import (
 )
 
 func main() {
-	db, err := db.ConnectDb()
+	database, err := db.ConnectDb()
 	if err != nil {
 		log.Fatalf("Could not connect to the database: %v", err)
 	}
 
-	if err := migrations.RunMigrations(db); err != nil {
+	if err := migrations.RunMigrations(database); err != nil {
 		log.Fatalf("Could not run migrations: %v", err)
 	}
 	server := gin.Default()
@@ -31,10 +31,10 @@ func main() {
 	server.Use(middleware.RateLimitMiddleware())
 	server.Use(middleware.TimeoutMiddleware(30 * time.Second))
 
-	router.SetupAllRoutes(server, db)
+	router.SetupAllRoutes(server, database)
 
 	server.GET("/health", func(c *gin.Context) {
-		sqlDB, err := db.DB()
+		sqlDB, err := database.DB()
 		if err != nil {
 			c.JSON(http.StatusServiceUnavailable, gin.H{
 				"status": "database connection error",
