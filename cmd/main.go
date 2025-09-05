@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"log"
-	"manager_project/config"
-	"manager_project/config/migrations"
+	"manager_project/db"
+	"manager_project/db/migrations"
 	"manager_project/middleware"
 	"manager_project/router"
 	"net/http"
@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-	db, err := config.ConnectDb()
+	db, err := db.ConnectDb()
 	if err != nil {
 		log.Fatalf("Could not connect to the database: %v", err)
 	}
