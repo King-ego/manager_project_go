@@ -48,5 +48,5 @@ func (ctrl *StudentsController) GetStudentByID(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": student})
+	c.JSON(http.StatusOK, gin.H{"data ": student})
 }

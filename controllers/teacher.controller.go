@@ -51,5 +51,5 @@ func (t *TeacherController) GetTeacherByID(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"data": teacher})
+	c.JSON(200, gin.H{"data ": teacher})
 }
