@@ -33,7 +33,7 @@ func (sc *ScoreController) GetScoreByStudentId(c *gin.Context) {
 
 	if studentId == "" {
 		c.JSON(400, gin.H{
-			"error": "Student ID is required",
+			"error": "Student ID is required ",
 		})
 		return
 	}
