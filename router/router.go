@@ -29,6 +29,8 @@ func (r *SetupRouter) setupRouters() {
 	routers.SetupEnrollmentsRoutes(r.server, r.db)
 
 	routers.SetupClassesRoutes(r.server, r.db)
+
+	routers.SetupDashboardRoutes(r.server, r.db)
 }
 
 func (r *SetupRouter) Routers() {
