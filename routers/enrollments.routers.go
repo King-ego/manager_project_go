@@ -32,7 +32,6 @@ func (er *EnrollmentsRouters) setupEnrollmentsRoutes() {
 
 	{
 		enrollments.POST("/", controller.CreateEnrollment)
-		enrollments.GET("/", controller.GetAllEnrollments)
 	}
 
 }
