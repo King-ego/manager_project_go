@@ -25,6 +25,43 @@ func (dr *DashboardRouter) setupDashboardRoutes() {
 				"message": "Welcome to the Dashboard",
 			})
 		})
+
+		dashboard.GET("/stats", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard statistics",
+			})
+		})
+
+		dashboard.GET("/reports", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard reports",
+			})
+		})
+
+		dashboard.GET("/analytics", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard analytics",
+			})
+		})
+
+		dashboard.GET("/settings", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard settings",
+			})
+		})
+
+		dashboard.GET("/notifications", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard notifications",
+			})
+		})
+
+		dashboard.GET("/activity", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard activity",
+			})
+		})
+
 	}
 }
 
