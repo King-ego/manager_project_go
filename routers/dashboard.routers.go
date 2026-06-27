@@ -38,6 +38,12 @@ func (dr *DashboardRouter) setupDashboardRoutes() {
 			})
 		})
 
+		dashboard.GET("/analytics", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard analytics",
+			})
+		})
+
 	}
 }
 
