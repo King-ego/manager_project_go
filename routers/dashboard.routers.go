@@ -56,6 +56,12 @@ func (dr *DashboardRouter) setupDashboardRoutes() {
 			})
 		})
 
+		dashboard.GET("/activity", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard activity",
+			})
+		})
+
 	}
 }
 
