@@ -50,6 +50,12 @@ func (dr *DashboardRouter) setupDashboardRoutes() {
 			})
 		})
 
+		dashboard.GET("/notifications", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "Dashboard notifications",
+			})
+		})
+
 	}
 }
 
