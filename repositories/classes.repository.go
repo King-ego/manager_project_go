@@ -9,6 +9,7 @@ import (
 type ClassesRepository interface {
 	CreateClasses(classes *models.Classes) error
 	GetClassesByStudentId(classesId string) (*models.Classes, error)
+	GetClassesByTeacherId(teacherId string) (*models.Classes, error)
 }
 type classesRepository struct {
 	db *gorm.DB
@@ -28,6 +29,14 @@ func (er *classesRepository) CreateClasses(classes *models.Classes) error {
 func (er *classesRepository) GetClassesByStudentId(classesId string) (*models.Classes, error) {
 	var classes models.Classes
 	if err := er.db.Where("id = ?", classesId).First(&classes).Error; err != nil {
+		return nil, err
+	}
+	return &classes, nil
+}
+
+func (er *classesRepository) GetClassesByTeacherId(teacherId string) (*models.Classes, error) {
+	var classes models.Classes
+	if err := er.db.Where("teacher_id = ?", teacherId).First(&classes).Error; err != nil {
 		return nil, err
 	}
 	return &classes, nil
