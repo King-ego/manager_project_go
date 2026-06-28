@@ -30,3 +30,11 @@ func (c *ClassesUseCase) GetClassesByStudentId(classesId string) (*models.Classe
 	}
 	return classes, nil
 }
+
+func (c *ClassesUseCase) GetClassesByTeacherId(teacherId string) (*models.Classes, error) {
+	classes, err := c.repository.GetClassesByTeacherId(teacherId)
+	if err != nil {
+		return nil, err
+	}
+	return classes, nil
+}
