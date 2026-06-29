@@ -60,3 +60,25 @@ func (cc *ClassesController) GetClassesByStudentId(c *gin.Context) {
 		"data": classes,
 	})
 }
+
+func (cc *ClassesController) GetClassesByTeacherId(c *gin.Context) {
+	teacherId := c.Param("teacherId")
+	if teacherId == "" {
+		c.JSON(400, gin.H{
+			"error": "Teacher ID is required",
+		})
+		return
+	}
+
+	classes, err := cc.useCase.GetClassesByTeacherId(teacherId)
+	if err != nil {
+		c.JSON(404, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"data": classes,
+	})
+}
