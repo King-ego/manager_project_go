@@ -3,6 +3,7 @@ package repositories
 import "gorm.io/gorm"
 
 type DashboardRepository interface {
+	GetDashboard() (any, error)
 }
 
 type dashboardRepository struct {
