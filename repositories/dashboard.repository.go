@@ -35,3 +35,14 @@ func (dr *dashboardRepository) GetStats() (any, error) {
 
 	return result, nil
 }
+
+func (dr *dashboardRepository) GetSummary() (any, error) {
+	var result any
+	err := dr.db.Raw("SELECT * FROM dashboard_summary").Scan(&result).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
